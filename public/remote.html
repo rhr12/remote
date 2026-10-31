@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="robots" content="noindex">
+<title>TV Remote</title>
+<link rel="stylesheet" href="/base.css"><link rel="stylesheet" href="/remote.css">
+</head>
+<body>
+<main>
+  <header>
+    <div><h1 id="name">TV Remote</h1><span class="pill"><span class="dot" id="dot"></span><span id="state">Connecting…</span></span></div>
+    <button class="power" data-key="power" aria-label="Power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v8M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button>
+  </header>
+  <div id="banner" class="banner hidden" role="status"></div>
+
+  <section class="card sub">
+    <div class="seg" role="group" aria-label="Navigation style">
+      <button id="mPad" aria-pressed="true">Touchpad</button><button id="mDpad" aria-pressed="false">Buttons</button>
+    </div>
+    <div id="pad" class="pad" aria-label="Touchpad: swipe to move, tap to select"><div class="hint">Swipe to move<br>Tap to select</div></div>
+    <div id="dpad" class="dpad hidden">
+      <button class="u" data-key="up" aria-label="Up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button>
+      <button class="l" data-key="left" aria-label="Left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
+      <button class="r" data-key="right" aria-label="Right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="d" data-key="down" aria-label="Down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <button class="c" data-key="ok" aria-label="Select">OK</button>
+    </div>
+    <div class="grid">
+      <button class="key" data-key="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+      <button class="key" data-key="home" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8M5 10v10h14V10"/></svg></button>
+      <button class="key hidden" id="artBtn" aria-label="Art Mode">Art</button>
+    </div>
+  </section>
+
+  <section class="vol">
+    <div class="rocker" role="group" aria-label="Volume"><button data-key="volup" data-repeat aria-label="Volume up">+</button><span>VOL</span><button data-key="voldown" data-repeat aria-label="Volume down">−</button></div>
+    <button class="key" data-key="mute" data-tall aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4zM22 9l-6 6M16 9l6 6"/></svg></button>
+  </section>
+
+  <section class="play" aria-label="Playback">
+    <button class="key" data-key="rewind" aria-label="Rewind">◀◀</button>
+    <button class="key" data-key="play" aria-label="Play">▶</button>
+    <button class="key" data-key="pause" aria-label="Pause">❚❚</button>
+    <button class="key" data-key="ffwd" aria-label="Fast forward">▶▶</button>
+  </section>
+
+  <div id="extended" class="hidden">
+    <button class="more" id="moreBtn" aria-expanded="false">More buttons</button>
+    <div id="sheet" class="sheet card hidden"></div>
+  </div>
+</main>
+<div id="toast" class="toast" role="alert"></div>
+<script src="/remote.js"></script>
+</body>
+</html>

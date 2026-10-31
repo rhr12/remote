@@ -1,0 +1,19 @@
+{
+  "name": "remote",
+  "version": "1.0.0",
+  "description": "Guest-friendly web remote for TVs, opened by tapping an NFC tag. Home Wi-Fi only.",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "server/index.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "ENABLE_MOCK_TV=1 node server/index.js",
+    "test": "node --test --test-concurrency=1 test/*.test.js",
+    "set-admin": "node scripts/set-admin.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}

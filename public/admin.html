@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Remote Admin</title><link rel="stylesheet" href="/base.css"><link rel="stylesheet" href="/admin.css"></head>
+<body><main>
+  <div class="top"><h1>Remote · Admin</h1><button id="logout" class="btn sec hidden">Sign out</button></div>
+
+  <form id="login" class="card hidden"><h2>Sign in</h2>
+    <p id="notConfigured" class="muted hidden">No admin password is set yet. On the MacBook run <code>npm run set-admin</code>, then reload.</p>
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required>
+    <div class="row"><button class="btn">Sign in</button></div><p id="loginErr" class="err" role="alert"></p>
+  </form>
+
+  <div id="app" class="hidden">
+    <section id="list"></section>
+    <form id="add" class="card"><h2>Add a TV</h2>
+      <label for="aName">Name</label><input id="aName" maxlength="40" placeholder="Living Room" required>
+      <label for="aBrand">Brand</label><select id="aBrand"></select>
+      <label for="aHost">TV IP address (give it a DHCP reservation in your router)</label><input id="aHost" inputmode="decimal" placeholder="192.168.1.50" required>
+      <label for="aMac">MAC address (optional — enables wake-up; auto-filled by "Detect")</label><input id="aMac" placeholder="aa:bb:cc:dd:ee:ff">
+      <label for="aLevel">Guest access</label><select id="aLevel"><option value="basic">Basic (nav, volume, power, playback)</option><option value="extended">Extended (+ menu, source, channels, numbers)</option></select>
+      <div class="row"><button type="button" id="detect" class="btn sec">Detect TV</button><button class="btn">Add TV</button></div>
+      <p id="addInfo" class="muted"></p><p id="addErr" class="err" role="alert"></p>
+    </form>
+  </div>
+</main>
+<script src="/admin.js"></script></body></html>
