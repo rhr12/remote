@@ -108,7 +108,7 @@ function createApp({ config, store, manager, auth }) {
   app.use('/api/admin', middleware(createLimiter({ windowMs: 60000, max: 120 }), ip), admin);
 
   admin.post('/login', wrap(async (req, res) => { auth.login(req, res); res.json({ ok: true }); }));
-  admin.get('/session', (req, res) => res.json({ admin: auth.isAdmin(req), configured: auth.configured() }));
+  admin.get('/session', (req, res) => res.json({ admin: auth.canAdminister(req), configured: auth.configured() }));
   admin.post('/logout', (req, res) => { auth.logout(req, res); res.json({ ok: true }); });
 
   admin.use(auth.requireAdmin);

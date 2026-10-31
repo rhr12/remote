@@ -20,7 +20,7 @@ Hardware-dependent limitations: the first pairing needs someone to press **Allow
 
 1. Install Node 20+ (`brew install node`, or from nodejs.org).
 2. `git clone https://github.com/rhr12/remote.git && cd remote && npm ci --omit=dev`
-3. Set the admin password (stored hashed in `data/`, never in git): `npm run set-admin`
+3. *(Optional)* Set an admin password (stored hashed in `data/`, never in git): `npm run set-admin`. **If you skip this, the admin page is open to anyone on your Wi-Fi** (they could add/delete TVs or forget pairings). Guests still only get the guest remote.
 4. Test run: `npm start` → open the printed `http://<mac-ip>:3000/admin`.
 5. Run permanently: `./scripts/install-launchd.sh`. It starts at login, restarts on crash (`KeepAlive`), and uses `caffeinate -s` to prevent sleep on AC power. Also: System Settings → Lock Screen / Battery → avoid sleeping on power adapter, enable auto-login for the user, and keep the Mac plugged in. Logs: `data/server.log`.
 6. Give the Mac **and the TV** DHCP reservations in your router so addresses never change.

@@ -29,6 +29,11 @@ test('admin flow, guest control, and secrecy', async (t) => {
   // admin not configured
   let r = await fetch(base + '/api/admin/login', J({ password: 'x' }));
   assert.equal(r.status, 503);
+  // no password set: admin is open to the LAN, but guests do NOT get extended keys
+  assert.equal((await fetch(base + '/api/admin/tvs')).status, 200);
+  assert.equal((await fetch(base + '/api/admin/tvs', J({ name: 'Z', brand: 'mock', host: '192.168.1.9' }))).status, 403); // still needs CSRF header
+  const open = await (await fetch(base + '/api/admin/session')).json();
+  assert.equal(open.admin, true); assert.equal(open.configured, false);
   ctx.auth.setPassword('correct horse battery');
 
   // unauthenticated admin access

@@ -43,6 +43,7 @@ function createAuth({ dataDir, sessionHours = 12 }) {
     configured: () => fs.existsSync(file),
     setPassword,
     isAdmin,
+    canAdminister: (req) => !fs.existsSync(file) || isAdmin(req),
     login(req, res) {
       if (!fs.existsSync(file)) throw new AppError(503, 'admin_not_configured', 'Admin password not set. Run "npm run set-admin" on the server.');
       const rl = loginLimiter.take(req.socket.remoteAddress);
@@ -55,7 +56,8 @@ function createAuth({ dataDir, sessionHours = 12 }) {
     logout(req, res) { sessions.delete(parseCookie(req)); res.clearCookie('rs', { path: '/' }); },
     // Requires session + a custom header (CSRF defence in depth on top of SameSite=Strict).
     requireAdmin(req, res, next) {
-      if (!fs.existsSync(file)) return next(new AppError(503, 'admin_not_configured', 'Admin password not set. Run "npm run set-admin" on the server.'));
+      // No password set = open admin for anyone on the LAN (owner's choice). Guest key levels never rely on this.
+      if (!fs.existsSync(file)) return req.method !== 'GET' && req.get('x-remote-csrf') !== '1' ? next(new AppError(403, 'csrf', 'Missing CSRF header.')) : next();
       if (!isAdmin(req)) return next(new AppError(401, 'unauthorized', 'Please sign in.'));
       if (req.method !== 'GET' && req.get('x-remote-csrf') !== '1') return next(new AppError(403, 'csrf', 'Missing CSRF header.'));
       next();
